@@ -1,0 +1,81 @@
+sim:
+  headless: True
+  visualize: True
+  obj_asset_root: "/homeL/1wang/workspace/toolee_ws/src/dataset_generation/src/assets/Dataset3DModel"
+  num_threads: 8
+  z_top: True
+
+env:
+  num_envs: 100
+  env_per_row: 10
+  env_spacing: 1
+  save_per_frame: 5
+  collision_filter: 1
+  object_seg_id: 2
+  hand_seg_id: 1
+
+  camera:
+    width: 1920
+    height: 1080
+    init_location: [0.3, 0.3, 1.5]
+    lookat: [0,0,1]
+    randomize:
+      is_randomize: True
+      offset_limit_x: [0.3, 0.6]
+      offset_limit_y: [0.3, 0.6]
+      limit_z: [0.9, 1.5]
+
+shadowhand:
+  asset_root: "/homeL/1wang/workspace/toolee_ws/src/dataset_generation/src/assets/shadowhand_asset"
+  joint_name_map: "shadowhand_dict_jonit_name.yaml"
+  hand_asset: "urdf/lf_hand_biotac_notip.urdf"
+  grasp_pose: "grasp_pose.yaml"
+
+ee_name_map:
+  hammer_grip: ['head1', 'grip']
+  screwdriver: ['head1']
+  wrench: ['head1', 'head2']
+
+affordance_seg_id_map:
+  empty: 0
+  hand: 1
+  object: 2
+  hammer_grip:
+    head1: 3
+    grip: 4
+  screwdriver:
+    head1: 5
+  wrench:
+    head1: 6
+    head2: 7
+
+dataset:
+  is_save: True
+  total_num_per_obj: 1000
+  save_path: "/dataSSD/1wang/dataspace/DatasetToolEE"
+
+pose_init:
+  hand:
+    r: [-90, 90, 0] # deg
+    t: [0.035 , 0.075, 0.95] # translation
+  object:
+    r: [0.0, 0.0, 0.0]
+    t: [0.0, 0.0, 1]
+
+object_randomization:
+  is_randomized: True
+  # since the 3D model is diagonal normalized to 1, therefore rescale it to normal size
+  standard_scale:
+    hammer_grip: 300  # denote the standard size is roughly 300 mm
+    screwdriver: 200
+    wrench: 200
+  random_scale_limit: 0.2 # 0.2
+  randomize_color: True
+  random_tz_limit: 0.05  # 0.05
+  offset_pos_limit: 0.2
+  offset_angle_limit: 45
+
+visualization:
+  is_visualize: False
+  frame_id: 'map'
+  sec: 2

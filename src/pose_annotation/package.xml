@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>pose_annotation</name>
+  <version>0.0.1</version>
+  <description>The interactive_marker_tutorials package</description>
+
+  <maintainer email="todo@todo.todo">todo</maintainer>
+
+  <license>BSD</license>
+  <url type="website">http://ros.org/wiki/interactive_marker_tutorials</url>
+
+  <author>todo</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>sensor_msgs</depend>
+
+  <build_depend>rospy</build_depend>
+  <build_depend>interactive_markers</build_depend>
+  <build_depend>visualization_msgs</build_depend>
+  <build_depend>tf</build_depend>
+
+  <exec_depend>rospy</exec_depend>
+  <exec_depend>interactive_markers</exec_depend>
+  <exec_depend>visualization_msgs</exec_depend>
+  <exec_depend>tf</exec_depend>
+
+</package>

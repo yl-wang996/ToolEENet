@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>tool_ee</name>
+  <version>0.0.1</version>
+  <description>The inference server of toolEE project</description>
+
+  <maintainer email="yunlong.wang.de@outlook.com">Yunlong Wang</maintainer>
+
+  <license>MIT</license>
+  <!-- <url type="website"></url> -->
+
+  <author>Yunlong Wang</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>sensor_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>rospy</depend>
+  <depend>visualization_msgs</depend>
+  <depend>tf</depend>
+<!--  <depend>cv_bridge</depend>-->
+
+<!--  <build_depend>cv_bridge</build_depend>-->
+<!--  <exec_depend>cv_bridge</exec_depend>-->
+
+<!--  <build_depend>rospy</build_depend>-->
+<!--  <build_depend>geometry_msgs</build_depend>-->
+<!--  <build_depend>visualization_msgs</build_depend>-->
+<!--  <build_depend>tf</build_depend>-->
+
+<!--  <exec_depend>rospy</exec_depend>-->
+<!--  <exec_depend>geometry_msgs</exec_depend>-->
+<!--  <exec_depend>visualization_msgs</exec_depend>-->
+<!--  <exec_depend>tf</exec_depend>-->
+
+</package>

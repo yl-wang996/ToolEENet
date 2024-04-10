@@ -1,0 +1,5 @@
+# created by virtualenv automatically
+playground/dataset_generation/assets/Dataset3DModel/*
+./bin/*
+./include/*
+./lib/*

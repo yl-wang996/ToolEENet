@@ -1,0 +1,7 @@
+#request fields
+sensor_msgs/Image rgb
+bool vis
+---
+#response fields
+sensor_msgs/Image[] seg_list
+string[] seg_name_list

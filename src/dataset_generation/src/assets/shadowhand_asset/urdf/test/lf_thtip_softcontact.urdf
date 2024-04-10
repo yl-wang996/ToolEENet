@@ -1,0 +1,88 @@
+<?xml version="1.0" ?>
+<!-- =================================================================================== -->
+<!-- |    EDITING THIS FILE BY HAND IS NOT RECOMMENDED                                 | -->
+<!-- =================================================================================== -->
+<robot name="lf_fftip_softcontact" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<!-- =================================================================================== -->
+
+  <link name="lh_ffmiddle"></link>
+  <joint name="lh_FFJ1" type="prismatic">
+    <parent link="lh_ffmiddle"/>
+    <child link="lh_ffdistal"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="0.0" upper="1.0" velocity="1e9" effort="1e9"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+
+<!-- =================================================================================== -->
+  <link name="lh_ffdistal">
+    <inertial>
+        <origin rpy="0.0 0.0 0.0" xyz="0.0 -9.49264e-3 0.0"/>
+        <mass value="0.80301"/>
+        <inertia ixx="2.13047e-8" iyy="4.78096e-9" izz="2.13047e-8" ixy="0.0" ixz="0.0" iyz="0.0"/>
+    </inertial>
+    <visual>
+      <origin rpy="0.0 1.57079632679 1.57079632679" xyz="0.0 0.0 0.016"/>
+      <geometry>
+        <mesh filename="/homeL/hzhang/assets/urdf/bio_tac/meshes/biotac/merged_tip.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0.0 1.57079632679 0.0" xyz="0.0 0.0 0.016"/>
+        <geometry>
+          <mesh filename="/homeL/hzhang/assets/urdf/bio_tac/meshes/biotac/merged_tip.obj"/>
+        </geometry>
+    </collision>
+  </link>
+  <!--
+  <link name="lh_ffdistal">
+    <inertial>
+      <mass value="0.0"/>
+      <origin xyz="0 0 0.0"/>
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+    </inertial>
+    <visual>
+      <origin rpy="0.0 1.57079632679 1.57079632679" xyz="0.0 0.0 0.025"/>
+      <geometry>
+        <mesh filename="package://bio_tac/meshes/biotac/bc/top_side_core_bc.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0.0 1.57079632679 0.0" xyz="0.0 0.0 0.016"/>
+      <geometry>
+        <mesh filename="package://bio_tac/meshes/biotac/bc/top_side_core_bc.obj"/>
+      </geometry>
+    </collision>
+  </link>
+  -->
+  <!--
+  <link name="lh_ffbiotac">
+    <fem>
+      <origin rpy="0.0 1.57079632679 0.0" xyz="0.0 0.0 0.016"/>
+      <density value="1e3"/>
+      <youngs value="1552230.93"/>
+      <poissons value="0.31645428"/>
+      <damping value="0.0"/>
+      <attachDistance value="2.0e-3"/>
+      <tetmesh filename="package://bio_tac/meshes/biotac/int_ext_skin/int_ext_skin_combined_ftw.tet"/>
+    </fem>
+  </link>
+  -->
+  <!--
+  <joint name="lh_ff_bc_to_biotac" type="fixed">
+    <parent link="lh_ffdistal"/>
+    <child link="lh_ffbiotac"/>
+    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+  </joint>
+  -->
+
+<!-- =================================================================================== -->
+<!-- =================================================================================== -->
+<!-- =================================================================================== -->
+<!-- =================================================================================== -->
+
+
+
+</robot>
+

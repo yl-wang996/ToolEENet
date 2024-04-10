@@ -1,0 +1,9 @@
+<!-- <?xml version="1.0"?> -->
+<launch>
+
+    <node name="seg_pred_node" pkg="tool_ee" type="seg_pred_service.py" output="screen">
+<!--             <param name="key" value="value" /> -->
+         <env name="LD_PRELOAD" value="/usr/lib/x86_64-linux-gnu/libtiff.so.5" />
+         <env name="LD_LIBRARY_PATH" value="$(env LD_LIBRARY_PATH):/opt/ros/noetic/lib" />
+    </node>
+</launch>

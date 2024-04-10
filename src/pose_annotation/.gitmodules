@@ -1,0 +1,12 @@
+[submodule "apriltag_ros"]
+	path = apriltag_ros
+	url = https://github.com/AprilRobotics/apriltag_ros.git
+[submodule "apriltag"]
+	path = apriltag
+	url = https://github.com/AprilRobotics/apriltag.git
+[submodule "iai_kinect2"]
+	path = iai_kinect2
+	url = https://github.com/TAMS-Group/iai_kinect2.git
+[submodule "apriltag-imgs"]
+	path = apriltag-imgs
+	url = https://github.com/yl-wang996/apriltag-imgs.git

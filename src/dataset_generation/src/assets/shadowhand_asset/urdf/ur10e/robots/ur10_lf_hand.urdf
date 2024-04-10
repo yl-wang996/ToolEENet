@@ -1,0 +1,209 @@
+<?xml version="1.0" ?>
+<!-- =================================================================================== -->
+<!-- |    EDITING THIS FILE BY HAND IS NOT RECOMMENDED                                 | -->
+<!-- =================================================================================== -->
+<robot name="ur10_lf" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <link name="ra_base_link">
+    <visual>
+      <origin rpy="0 0 3.14159265359" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ur10/meshes/visual/base.dae"/>
+      </geometry>
+      <material name="LightGrey">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 3.14159265359" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ur10/meshes/collision/base.obj"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="4.0"/>
+      <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+      <inertia ixx="0.0061063308908" ixy="0.0" ixz="0.0" iyy="0.0061063308908" iyz="0.0" izz="0.01125"/>
+    </inertial>
+  </link>
+  <joint name="ra_shoulder_pan_joint" type="revolute">
+    <parent link="ra_base_link"/>
+    <child link="ra_shoulder_link"/>
+    <origin rpy="0 0 3.14159265359" xyz="0 0 0.0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="330.0" lower="-6.28318530718" upper="6.28318530718" velocity="2.16"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+  <link name="ra_shoulder_link">
+    <visual>
+      <origin rpy="0 0 3.14159265359" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ur10/meshes/visual/shoulder.dae"/>
+      </geometry>
+      <material name="LightGrey">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 3.14159265359" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ur10/meshes/collision/shoulder.obj"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="7.778"/>
+      <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+      <inertia ixx="0.0314743125769" ixy="0.0" ixz="0.0" iyy="0.0314743125769" iyz="0.0" izz="0.021875625"/>
+    </inertial>
+  </link>
+  <joint name="ra_shoulder_lift_joint" type="revolute">
+    <parent link="ra_shoulder_link"/>
+    <child link="ra_upper_arm_link"/>
+    <origin rpy="1.570796327 0 0" xyz="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="330.0" lower="-6.28318530718" upper="6.28318530718" velocity="2.16"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+  <link name="ra_upper_arm_link">
+    <visual>
+      <origin rpy="1.57079632679 0 -1.57079632679" xyz="0 0 0.220941"/>
+      <geometry>
+        <mesh filename="package://ur10/meshes/visual/upperarm.dae"/>
+      </geometry>
+      <material name="LightGrey">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="1.57079632679 0 -1.57079632679" xyz="0 0 0.220941"/>
+      <geometry>
+        <mesh filename="package://ur10/meshes/collision/upperarm.obj"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="12.93"/>
+      <origin rpy="0 1.57079632679 0" xyz="-0.306 0.0 0.175"/>
+      <inertia ixx="0.421753803798" ixy="0.0" ixz="0.0" iyy="0.421753803798" iyz="0.0" izz="0.036365625"/>
+    </inertial>
+  </link>
+  <joint name="ra_elbow_joint" type="revolute">
+    <parent link="ra_upper_arm_link"/>
+    <child link="ra_forearm_link"/>
+    <origin rpy="0 0 0" xyz="-0.612 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="150.0" lower="-3.14159265359" upper="3.14159265359" velocity="3.15"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+  <link name="ra_forearm_link">
+    <visual>
+      <origin rpy="1.57079632679 0 -1.57079632679" xyz="0 0 0.049042"/>
+      <geometry>
+        <mesh filename="package://ur10/meshes/visual/forearm.dae"/>
+      </geometry>
+      <material name="LightGrey">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="1.57079632679 0 -1.57079632679" xyz="0 0 0.049042"/>
+      <geometry>
+        <mesh filename="package://ur10/meshes/collision/forearm.obj"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="3.87"/>
+      <origin rpy="0 1.57079632679 0" xyz="-0.306 0.0 0.049042"/>
+      <inertia ixx="0.111069694097" ixy="0.0" ixz="0.0" iyy="0.111069694097" iyz="0.0" izz="0.010884375"/>
+    </inertial>
+  </link>
+  <joint name="ra_wrist_1_joint" type="revolute">
+    <parent link="ra_forearm_link"/>
+    <child link="ra_wrist_1_link"/>
+    <origin rpy="0 0 0" xyz="-0.5723 0 0.163941"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="54.0" lower="-6.28318530718" upper="6.28318530718" velocity="3.2"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+  <link name="ra_wrist_1_link">
+    <visual>
+      <origin rpy="1.57079632679 0 0" xyz="0 0 -0.1149"/>
+      <geometry>
+        <mesh filename="package://ur10/meshes/visual/wrist1.dae"/>
+      </geometry>
+      <material name="LightGrey">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="1.57079632679 0 0" xyz="0 0 -0.1149"/>
+      <geometry>
+        <mesh filename="package://ur10/meshes/collision/wrist1.obj"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.96"/>
+      <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+      <inertia ixx="0.00494270805625" ixy="0.0" ixz="0.0" iyy="0.00494270805625" iyz="0.0" izz="0.0055125"/>
+    </inertial>
+  </link>
+  <joint name="ra_wrist_2_joint" type="revolute">
+    <parent link="ra_wrist_1_link"/>
+    <child link="ra_wrist_2_link"/>
+    <origin rpy="1.570796327 0 0" xyz="0 -0.1157 -2.37304666792e-11"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="54.0" lower="-6.28318530718" upper="6.28318530718" velocity="3.2"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+  <link name="ra_wrist_2_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 -0.1158"/>
+      <geometry>
+        <mesh filename="package://ur10/meshes/visual/wrist2.dae"/>
+      </geometry>
+      <material name="LightGrey">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 -0.1158"/>
+      <geometry>
+        <mesh filename="package://ur10/meshes/collision/wrist2.obj"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.96"/>
+      <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+      <inertia ixx="0.00414471887545" ixy="0.0" ixz="0.0" iyy="0.00414471887545" iyz="0.0" izz="0.0055125"/>
+    </inertial>
+  </link>
+  <joint name="ra_wrist_3_joint" type="revolute">
+    <parent link="ra_wrist_2_link"/>
+    <child link="ra_wrist_3_link"/>
+    <origin rpy="1.57079632659 3.14159265359 3.14159265359" xyz="0 0.0922 -1.89105361091e-11"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="54.0" lower="-6.28318530718" upper="6.28318530718" velocity="3.2"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+  <link name="ra_wrist_3_link">
+    <visual>
+      <origin rpy="1.57079632679 0 0" xyz="0 0 -0.0922"/>
+      <geometry>
+        <mesh filename="package://ur10/meshes/visual/wrist3.dae"/>
+      </geometry>
+      <material name="LightGrey">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="1.57079632679 0 0" xyz="0 0 -0.0922"/>
+      <geometry>
+        <mesh filename="package://ur10/meshes/collision/wrist3.obj"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.202"/>
+      <origin rpy="0 0 0" xyz="0.0 0.0 -0.01525"/>
+      <inertia ixx="0.000117921661165" ixy="0.0" ixz="0.0" iyy="0.000117921661165" iyz="0.0" izz="0.000204525"/>
+    </inertial>
+  </link>
+</robot>
+

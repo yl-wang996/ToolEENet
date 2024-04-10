@@ -1,0 +1,6 @@
+#request fields
+sensor_msgs/PointCloud2 pc2
+---
+#response fields
+geometry_msgs/Pose pred_pose
+float32[] pred_symtrs

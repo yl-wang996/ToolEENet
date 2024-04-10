@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+    <include file="$(find tool_ee)/launch/affordance_segmentation.launch"/>
+    <include file="$(find tool_ee)/launch/pose_estimation.launch"/>
+</launch>

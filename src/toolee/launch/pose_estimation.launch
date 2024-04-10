@@ -1,0 +1,6 @@
+<!-- <?xml version="1.0"?> -->
+<launch>
+
+    <node name="pose_pred_node" pkg="tool_ee" type="pose_pred_service.py" output="screen">
+    </node>
+</launch>

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+    <group ns="annotation_node">
+      <node name="marker" pkg="pose_annotation" type="basic_controls.py" output="screen">      </node>
+    </group>
+</launch>

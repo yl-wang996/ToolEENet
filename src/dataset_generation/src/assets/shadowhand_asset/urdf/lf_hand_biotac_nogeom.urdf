@@ -1,0 +1,504 @@
+<?xml version="1.0" ?>
+<!-- =================================================================================== -->
+<!-- |    EDITING THIS FILE BY HAND IS NOT RECOMMENDED                                 | -->
+<!-- =================================================================================== -->
+<robot name="ur10e_lf" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<!-- =================================================================================== -->
+  <!-- links: main serial chain -->
+
+  <link name="lh_wrist"></link>
+  <link name="lh_wrist_tem1"></link>
+  <link name="lh_wrist_tem2"></link>
+  <link name="lh_wrist_tem3"></link>
+  <link name="lh_wrist_tem4"></link>
+  <link name="lh_wrist_tem5"></link>
+
+  <!-- Translational joints -->
+  <!-- X translation -->
+  <joint name="lh_wrist_trans_x" type="prismatic">
+    <parent link="lh_wrist"/>
+    <child link="lh_wrist_tem1"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="200" lower="-10.0" upper="10.0" velocity="2.0"/>
+  </joint>
+  <joint name="lh_wrist_trans_y" type="prismatic">
+    <parent link="lh_wrist_tem1"/>
+    <child link="lh_wrist_tem2"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="200" lower="-10.0" upper="10.0" velocity="2.0"/>
+  </joint>
+  <joint name="lh_wrist_trans_z" type="prismatic">
+    <parent link="lh_wrist_tem2"/>
+    <child link="lh_wrist_tem3"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="200" lower="-10.0" upper="10.0" velocity="2.0"/>
+  </joint>
+
+  <!-- Rotational joints -->
+  <joint name="lh_wrist_rot_x" type="revolute">
+    <parent link="lh_wrist_tem3"/>
+    <child link="lh_wrist_tem4"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="200" lower="-1.0" upper="1.0" velocity="2.0"/>
+  </joint>
+  <joint name="lh_wrist_rot_y" type="revolute">
+    <parent link="lh_wrist_tem4"/>
+    <child link="lh_wrist_tem5"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="200" lower="-1.0" upper="1.0" velocity="2.0"/>
+  </joint>
+  <joint name="lh_wrist_rot_z" type="revolute">
+    <parent link="lh_wrist_tem5"/>
+    <child link="lh_palm"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="200" lower="-1.0" upper="1.0" velocity="2.0"/>
+  </joint>
+
+<!-- =================================================================================== -->
+
+  <link name="lh_palm"></link>
+
+<!-- =================================================================================== -->
+  <link name="lh_grasp_ref_center"></link>
+
+  <joint name="lh_grasp_ref" type="fixed">
+    <parent link="lh_palm"/>
+    <child link="lh_grasp_ref_center"/>
+    <origin rpy="0 0 0" xyz="0.0 0 0.095"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+<!-- =================================================================================== -->
+  <link name="lh_ffknuckle"></link>
+  <joint name="lh_FFJ4" type="revolute">
+    <parent link="lh_palm"/>
+    <child link="lh_ffknuckle"/>
+    <!--<origin xyz="0.033 0 0.095" rpy="0 0 0" />-->
+    <origin rpy="0 0 0" xyz="-0.033 0 0.095"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="200" lower="-0.3490658503988659" upper="0.3490658503988659" velocity="2.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+
+
+<!-- =================================================================================== -->
+  <link name="lh_ffproximal"></link>
+  <joint name="lh_FFJ3" type="revolute">
+    <parent link="lh_ffknuckle"/>
+    <child link="lh_ffproximal"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="200" lower="-0.2617993877991494" upper="1.5707963267948966" velocity="2.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+
+
+<!-- =================================================================================== -->
+  <link name="lh_ffmiddle"></link>
+  <joint name="lh_FFJ2" type="revolute">
+    <parent link="lh_ffproximal"/>
+    <child link="lh_ffmiddle"/>
+    <origin rpy="0 0 0" xyz="0 0 0.045"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="200" lower="0" upper="1.5707963267948966" velocity="2.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+
+
+<!-- =================================================================================== -->
+  <!--link name="lh_ffdistal">
+  </link-->
+
+  <link name="lh_ffdistal">
+  </link>
+
+  <!--link name="lh_ffbiotac">
+    <fem>
+      <origin rpy="0.0 1.57079632679 0.0" xyz="0.0 0.0 0.016"/>
+      <density value="1e3"/>
+      <youngs value="1552230.93"/>
+      <poissons value="0.31645428"/>
+      <damping value="0.0"/>
+      <attachDistance value="2.0e-3"/>
+      <tetmesh filename="package://bio_tac/meshes/biotac/int_ext_skin/int_ext_skin_combined_ftw.tet"/>
+    </fem>
+  </link-->
+
+  <!--joint name="lh_ff_bc_to_biotac" type="fixed">
+    <parent link="lh_ffdistal"/>
+    <child link="lh_ffbiotac"/>
+    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+  </joint-->
+
+  <joint name="lh_FFJ1" type="revolute">
+    <parent link="lh_ffmiddle"/>
+    <child link="lh_ffdistal"/>
+    <origin rpy="0 0 0" xyz="0 0 0.025"/>
+    <axis xyz="1 0 0"/>
+    <!-- standard distal joint -->
+    <limit effort="2" lower="0" upper="1.5707963267948966" velocity="2.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+
+
+  <link name="lh_fftip">
+  </link>
+  <joint name="lh_FFtip" type="fixed">
+    <parent link="lh_ffdistal"/>
+    <child link="lh_fftip"/>
+    <origin rpy="0 0 0" xyz="0 0 0.026"/>
+  </joint>
+
+
+<!-- =================================================================================== -->
+  <link name="lh_mfknuckle"></link>
+  <joint name="lh_MFJ4" type="revolute">
+    <parent link="lh_palm"/>
+    <child link="lh_mfknuckle"/>
+    <!--<origin xyz="0.033 0 0.095" rpy="0 0 0" />-->
+    <origin rpy="0 0 0" xyz="-0.011 0 0.099"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="2" lower="-0.3490658503988659" upper="0.3490658503988659" velocity="2.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+
+<!-- =================================================================================== -->
+  <link name="lh_mfproximal"></link>
+  <joint name="lh_MFJ3" type="revolute">
+    <parent link="lh_mfknuckle"/>
+    <child link="lh_mfproximal"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="2" lower="-0.2617993877991494" upper="1.5707963267948966" velocity="2.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+
+<!-- =================================================================================== -->
+  <link name="lh_mfmiddle"></link>
+  <joint name="lh_MFJ2" type="revolute">
+    <parent link="lh_mfproximal"/>
+    <child link="lh_mfmiddle"/>
+    <origin rpy="0 0 0" xyz="0 0 0.045"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="2" lower="0" upper="1.5707963267948966" velocity="2.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+
+<!-- =================================================================================== -->
+  <!--link name="lh_mfdistal">
+  </link-->
+
+  <link name="lh_mfdistal">
+  </link>
+
+  <!--link name="lh_mfbiotac">
+    <fem>
+      <origin rpy="0.0 1.57079632679 0 0.0" xyz="0.0 0.0 0.016"/>
+      <density value="1e3"/>
+      <youngs value="1552230.93"/>
+      <poissons value="0.31645428"/>
+      <damping value="0.0"/>
+      <attachDistance value="1.0e-5"/>
+      <tetmesh filename="package://bio_tac/meshes/biotac/int_ext_skin/int_ext_skin_combined_ftw.tet"/>
+    </fem>
+  </link-->
+
+  <!--joint name="lh_mf_bc_to_biotac" type="fixed">
+    <parent link="lh_mfdistal"/>
+    <child link="lh_mfbiotac"/>
+    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+  </joint-->
+
+
+  <joint name="lh_MFJ1" type="revolute">
+    <parent link="lh_mfmiddle"/>
+    <child link="lh_mfdistal"/>
+    <origin rpy="0 0 0" xyz="0 0 0.025"/>
+    <axis xyz="1 0 0"/>
+    <!-- standard distal joint -->
+    <limit effort="2" lower="0" upper="1.5707963267948966" velocity="2.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+
+
+  <link name="lh_mftip">
+  </link>
+  <joint name="lh_MFtip" type="fixed">
+    <parent link="lh_mfdistal"/>
+    <child link="lh_mftip"/>
+    <origin rpy="0 0 0" xyz="0 0 0.026"/>
+  </joint>
+
+<!-- =================================================================================== -->
+  <link name="lh_rfknuckle"></link>
+  <joint name="lh_RFJ4" type="revolute">
+    <parent link="lh_palm"/>
+    <child link="lh_rfknuckle"/>
+    <!--<origin xyz="0.033 0 0.095" rpy="0 0 0" />-->
+    <origin rpy="0 0 0" xyz="0.011 0 0.095"/>
+    <axis xyz="0 -1 0"/>
+    <limit effort="2" lower="-0.3490658503988659" upper="0.3490658503988659" velocity="2.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+
+<!-- =================================================================================== -->
+  <link name="lh_rfproximal"></link>
+  <joint name="lh_RFJ3" type="revolute">
+    <parent link="lh_rfknuckle"/>
+    <child link="lh_rfproximal"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="2" lower="-0.2617993877991494" upper="1.5707963267948966" velocity="2.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+
+<!-- =================================================================================== -->
+  <link name="lh_rfmiddle"></link>
+  <joint name="lh_RFJ2" type="revolute">
+    <parent link="lh_rfproximal"/>
+    <child link="lh_rfmiddle"/>
+    <origin rpy="0 0 0" xyz="0 0 0.045"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="2" lower="0" upper="1.5707963267948966" velocity="2.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+
+<!-- =================================================================================== -->
+  <!--link name="lh_rfdistal">
+  </link-->
+
+  <link name="lh_rfdistal">
+  </link>
+
+  <!--link name="lh_rfbiotac">
+    <fem>
+      <origin rpy="0.0 1.57079632679 0 0.0" xyz="0.0 0.0 0.016"/>
+      <density value="1e3"/>
+      <youngs value="1552230.93"/>
+      <poissons value="0.31645428"/>
+      <damping value="0.0"/>
+      <attachDistance value="1.0e-5"/>
+      <tetmesh filename="package://bio_tac/meshes/biotac/int_ext_skin/int_ext_skin_combined_ftw.tet"/>
+    </fem>
+  </link-->
+
+  <!--joint name="lh_rf_bc_to_biotac" type="fixed">
+    <parent link="lh_rfdistal"/>
+    <child link="lh_rfbiotac"/>
+    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+  </joint-->
+
+  <joint name="lh_RFJ1" type="revolute">
+    <parent link="lh_rfmiddle"/>
+    <child link="lh_rfdistal"/>
+    <origin rpy="0 0 0" xyz="0 0 0.025"/>
+    <axis xyz="1 0 0"/>
+    <!-- standard distal joint -->
+    <limit effort="2" lower="0" upper="1.5707963267948966" velocity="2.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+
+
+  <link name="lh_rftip">
+  </link>
+  <joint name="lh_RFtip" type="fixed">
+    <parent link="lh_rfdistal"/>
+    <child link="lh_rftip"/>
+    <origin rpy="0 0 0" xyz="0 0 0.026"/>
+  </joint>
+
+<!-- =================================================================================== -->
+  <link name="lh_lfmetacarpal"></link>
+  <joint name="lh_LFJ5" type="revolute">
+    <parent link="lh_palm"/>
+    <child link="lh_lfmetacarpal"/>
+    <origin rpy="0 0.9599 0" xyz="0.033 0 0.02071"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="2" lower="0" upper="0.7853981633974483" velocity="2.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+
+<!-- =================================================================================== -->
+  <link name="lh_lfknuckle"></link>
+  <joint name="lh_LFJ4" type="revolute">
+    <parent link="lh_lfmetacarpal"/>
+    <child link="lh_lfknuckle"/>
+    <!--<origin xyz="0.033 0 0.095" rpy="0 0 0" />-->
+    <origin rpy="0 -0.9599 0" xyz="-0.05397275 0 0.03779463"/>
+    <axis xyz="0 -1 0"/>
+    <limit effort="2" lower="-0.3490658503988659" upper="0.3490658503988659" velocity="2.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+
+<!-- =================================================================================== -->
+  <link name="lh_lfproximal"></link>
+  <joint name="lh_LFJ3" type="revolute">
+    <parent link="lh_lfknuckle"/>
+    <child link="lh_lfproximal"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="2" lower="-0.2617993877991494" upper="1.5707963267948966" velocity="2.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+
+<!-- =================================================================================== -->
+  <link name="lh_lfmiddle"></link>
+  <joint name="lh_LFJ2" type="revolute">
+    <parent link="lh_lfproximal"/>
+    <child link="lh_lfmiddle"/>
+    <origin rpy="0 0 0" xyz="0 0 0.045"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="2" lower="0" upper="1.5707963267948966" velocity="2.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+
+<!-- =================================================================================== -->
+  <!--link name="lh_lfdistal">
+  </link-->
+
+
+  <link name="lh_lfdistal">
+  </link>
+
+  <!--link name="lh_lfbiotac">
+    <fem>
+      <origin rpy="0.0 1.57079632679 0.0" xyz="0.0 0.0 0.016"/>
+      <density value="1e3"/>
+      <youngs value="1552230.93"/>
+      <poissons value="0.31645428"/>
+      <damping value="0.0"/>
+      <attachDistance value="1.0e-5"/>
+      <tetmesh filename="package://bio_tac/meshes/biotac/int_ext_skin/int_ext_skin_combined_ftw.tet"/>
+    </fem>
+  </link-->
+
+  <!--joint name="lh_lf_bc_to_biotac" type="fixed">
+    <parent link="lh_lfdistal"/>
+    <child link="lh_lfbiotac"/>
+    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+  </joint-->
+
+  <joint name="lh_LFJ1" type="revolute">
+    <parent link="lh_lfmiddle"/>
+    <child link="lh_lfdistal"/>
+    <origin rpy="0 0 0" xyz="0 0 0.025"/>
+    <axis xyz="1 0 0"/>
+    <!-- standard distal joint -->
+    <limit effort="2" lower="0" upper="1.5707963267948966" velocity="2.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+
+
+
+  <link name="lh_lftip">
+  </link>
+  <joint name="lh_LFtip" type="fixed">
+    <parent link="lh_lfdistal"/>
+    <child link="lh_lftip"/>
+    <origin rpy="0 0 0" xyz="0 0 0.026"/>
+  </joint>
+
+<!-- =================================================================================== -->
+  <link name="lh_thbase"></link>
+  <joint name="lh_THJ5" type="revolute">
+    <parent link="lh_palm"/>
+    <child link="lh_thbase"/>
+    <origin rpy="-0.7853981633974483 0 1.5707963267948966" xyz="-0.034 -0.00858 0.029"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="5.0" lower="-1.0471975511965976" upper="1.0471975511965976" velocity="4.0"/>
+    <dynamics damping="0.2"/>
+  </joint>
+
+<!-- =================================================================================== -->
+  <link name="lh_thproximal"></link>
+  <joint name="lh_THJ4" type="revolute">
+    <parent link="lh_thbase"/>
+    <child link="lh_thproximal"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <axis xyz="0 -1 0"/>
+    <limit effort="3" lower="0.0" upper="1.2217304763960306" velocity="4.0"/>
+    <dynamics damping="0.2"/>
+  </joint>
+
+<!-- =================================================================================== -->
+  <link name="lh_thhub"></link>
+  <joint name="lh_THJ3" type="revolute">
+    <parent link="lh_thproximal"/>
+    <child link="lh_thhub"/>
+    <origin rpy="0 0 0" xyz="0 0 0.038"/>
+    <axis xyz="0 -1 0"/>
+    <limit effort="2.0" lower="-0.20943951023931953" upper="0.20943951023931953" velocity="4.0"/>
+    <dynamics damping="0.2"/>
+  </joint>
+
+<!-- =================================================================================== -->
+  <link name="lh_thmiddle"></link>
+  <joint name="lh_THJ2" type="revolute">
+    <parent link="lh_thhub"/>
+    <child link="lh_thmiddle"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="2.0" lower="-0.6981317007977318" upper="0.6981317007977318" velocity="2.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+
+
+<!-- =================================================================================== -->
+  <!-- common -->
+  <!--link name="lh_thdistal">
+  </link-->
+
+  <link name="lh_thdistal">
+  </link>
+
+  <!--link name="lh_thbiotac">
+    <fem>
+      <origin rpy="0.0 1.57079632679 0.0" xyz="0.0 0.0 0.016"/>
+      <density value="1e3"/>
+      <youngs value="1552230.93"/>
+      <poissons value="0.31645428"/>
+      <damping value="0.0"/>
+      <attachDistance value="1.0e-5"/>
+      <tetmesh filename="package://bio_tac/meshes/biotac/int_ext_skin/int_ext_skin_combined_ftw.tet"/>
+    </fem>
+  </link-->
+
+  <!--joint name="lh_th_bc_to_biotac" type="fixed">
+    <parent link="lh_thdistal"/>
+    <child link="lh_thbiotac"/>
+    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+  </joint-->
+
+
+  <joint name="lh_THJ1" type="revolute">
+    <parent link="lh_thmiddle"/>
+    <child link="lh_thdistal"/>
+    <origin rpy="0 0 0" xyz="0 0 0.032"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="1.0" lower="-0.2617993877991494" upper="1.5707963267948966" velocity="4.0"/>
+    <dynamics damping="0.2"/>
+  </joint>
+
+
+  <link name="lh_thtip">
+  </link>
+  <joint name="lh_thtip" type="fixed">
+    <parent link="lh_thdistal"/>
+    <child link="lh_thtip"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0275"/>
+  </joint>
+
+<!-- =================================================================================== -->
+<!-- =================================================================================== -->
+<!-- =================================================================================== -->
+<!-- =================================================================================== -->
+
+
+</robot>
+
